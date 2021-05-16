@@ -36,15 +36,23 @@ return require('packer').startup(function(use, use_rocks)
 
     -- test & debugging
     use {
-        { 'puremourning/vimspector',
-            setup = function ()
-                vim.fn.sign_define('vimspectorBP', {text=' ●', texthl='VimspectorBreakpoint'})
-                vim.fn.sign_define('vimspectorBPCond', {text=' ●', texthl='VimspectorBreakpointCond'})
-                vim.fn.sign_define('vimspectorBPDisabled', {text=' ●', texthl='VimspectorBreakpointDisabled'})
-                vim.fn.sign_define('vimspectorPC', {text='▶', texthl='VimspectorProgramCounter', linehl='VimspectorProgramCounterLine'})
-                vim.fn.sign_define('vimspectorPCBP', {text='●▶', texthl='VimspectorProgramCounterBreakpoint', linehl='VimspectorProgramCounterLine'})
-            end,
-            ft = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'} },
+        -- { 'puremourning/vimspector',
+        --     setup = function ()
+        --         vim.fn.sign_define('vimspectorBP', {text=' ●', texthl='VimspectorBreakpoint'})
+        --         vim.fn.sign_define('vimspectorBPCond', {text=' ●', texthl='VimspectorBreakpointCond'})
+        --         vim.fn.sign_define('vimspectorBPDisabled', {text=' ●', texthl='VimspectorBreakpointDisabled'})
+        --         vim.fn.sign_define('vimspectorPC', {text='▶', texthl='VimspectorProgramCounter', linehl='VimspectorProgramCounterLine'})
+        --         vim.fn.sign_define('vimspectorPCBP', {text='●▶', texthl='VimspectorProgramCounterBreakpoint', linehl='VimspectorProgramCounterLine'})
+        --     end,
+        --     ft = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'} },
+        { 'mfussenegger/nvim-dap',
+           requires = { 'rcarriga/nvim-dap-ui', config = function ()
+                require'dapui'.setup()
+           end},
+            config = function ()
+                require'wb.nvim-dap'.setup()
+            end
+        },
         { 'janko/vim-test',
             config = function ()
                 require'wb.vim-test'.setup()
